@@ -1,38 +1,26 @@
 #include "SRT_log.h"
 
-#include <stdarg.h>
-#include <stdlib.h> /* HAS_STDLIB */
-#include <string.h> /* HAS_STRING */
-
-#ifdef __linux__
+#ifdef HAVE_SYSLOG_H
 # 	include <syslog.h>
 #endif
 
-#if 1 /* HAS_UNISTD */
+#if HAVE_UNISTD_H
 # 	include <unistd.h>
+#	define SRT_ISATTY isatty(STDOUT_FILENO)
+#else
+#	define SRT_ISATTY 0
 #endif
 
-#if !defined(WIN32_PLATFORM_PSPC) && !defined(_WIN32) /* ANSICON */
-# 	define SRT_WINCOLOR 1
+#if !defined(WIN32_PLATFORM_PSPC) && !defined(_WIN32)
+#	define SRT_WINCOLOR 1
 #else
-# 	define SRT_WINCOLOR 0
+#	define SRT_WINCOLOR 0
 #endif
 
 static SRT_LogWriter SRT_log_writer = SRT_LogDefaultWriter;
 static SRT_LogPrio SRT_log_prio = SRT_LOG_DEBUG;
 static unsigned SRT_mcount;
 static FILE* SRT_target;
-
-static SRT_Bool
-SRT_IsWhitespace(char c) {
-	return
-		(c == '\t' ||
-		 c == '\n' ||
-		 c == '\v' ||
-		 c == '\f' ||
-		 c == '\r' ||
-		 c == ' ');
-}
 
 void
 SRT_LogFormationV(const char* invoke_func, const char* invoke_file,
@@ -115,7 +103,7 @@ SRT_LogDefaultWriter(char* message, SRT_LogPrio priority, SRT_LogAux* auxdata) {
 		"\033[35m"
 	};
 
-	SRT_Bool ansicolor = isatty(STDOUT_FILENO) || SRT_WINCOLOR; /* HAS_UNISTD */
+	SRT_Bool ansicolor = SRT_ISATTY || SRT_WINCOLOR;
 
 	char short_timebuf[9];
 	char long_timebuf[20];
@@ -152,7 +140,7 @@ SRT_LogDefaultWriter(char* message, SRT_LogPrio priority, SRT_LogAux* auxdata) {
 		fflush(target);
 	}
 
-#ifdef __linux__ /* HAS_SYSLOG */
+#ifdef HAVE_SYSLOG_H
 	syslog(LOG_DEBUG - (int)priority, "%s", message);
 #endif
 }

@@ -1,8 +1,5 @@
 #include "SRT_error.h"
-
-#include <stdio.h>
-#include <string.h>
-#include <stdarg.h>
+#include "SRT_std.h"
 
 char SRT_error_msg[SRT_ERROR_STRMAX];
 SRT_Error SRT_error_code;
@@ -32,7 +29,7 @@ SRT_ErrorString(const char* fmt, ...) {
 SRT_Error
 SRT_ErrorStatus(SRT_Error code) {
 	static const char* SRT_code_strings[] = {
-		NULL,
+		NULL, /* hmmm... */
 		"something went wrong",
 		"func was passed bad param",
 		"an allocation went bad",

@@ -1,15 +1,5 @@
 // SRT_define.h -- generic declarations for all headers
 
-/* #ifdef _DEFINE_H
- * #error "define.h may be included once per header"
- * #endif
- * #define _DEFINE_H
- */
-
-#include <stdio.h>
-#include <stdarg.h>
-
-/* determine C version */
 #ifdef __STDC__
 # 	ifdef __STDC_VERSION__
 # 		if __STDC_VERSION__ >= 201112L
@@ -23,15 +13,9 @@
 #		define SRT_CVER 1989
 # 	endif
 #else
-# 	define SRT_CVER 1978
+# 	error "K&R C unsupported"
 #endif
 
-#if SRT_CVER <= 1989
-# 	define const
-# 	define volatile
-#endif
-
-/* determine compiler */
 #if defined(__clang__)
 #	define SRT_CMPCLANG
 #elif defined(__ICC) || defined(__INTEL_COMPILER)
@@ -49,7 +33,6 @@
 #elif defined(__SUNPRO_C) || defined(__SUNPRO_CC)
 #	define SRT_CMPSOLARIS
 #endif
-
 /* handle NULL between C and C++ */
 #if !defined(NULL)
 # 	if defined(__cplusplus)
@@ -60,7 +43,7 @@
 #endif
 
 /* for functions defined in the header, inline linkage must be used
- * this macro logic is modified from SDL2 begin_code.h (zlib licensed)
+ * this macro logic is modified from SDL begin_code.h (zlib licensed)
  */
 #ifndef SRT_INLINE
 # 	if defined(_MSC_VER)
@@ -81,7 +64,6 @@
 # 	endif
 #endif
 
-/* use C caling convention */
 #ifndef SRT_CCALL
 # 	if defined(_MSC_VER) || defined(__WINRT__) && !defined(__GNUC__)
 # 		define SRT_CCALL __cdecl
@@ -90,49 +72,10 @@
 # 	endif
 #endif
 
-/* typedefs */
-#ifndef SRT_TYPEDEFS
-#define SRT_TYPEDEFS
-
-#if defined(__STDC__) || defined(__cplusplus) || defined(_MSC_EXTENSIONS)
-typedef void* SRT_Voidp;
-#else
-typedef char* SRT_Voidp;
-#endif
-
-typedef int SRT_Bool;
-
-#define SRT_True 1
-#define SRT_False 0
-
-#include <stdint.h>
-
-typedef int8_t    SRT_Sint8;
-typedef uint8_t   SRT_Uint8;
-typedef int16_t   SRT_Sint16;
-typedef uint16_t  SRT_Uint16;
-typedef int32_t   SRT_Sint32;
-typedef uint32_t  SRT_Uint32;
-typedef int64_t   SRT_Sint64;
-typedef uint64_t  SRT_Uint64;
-
-#endif
-
-/* printf style argument checking compiler hint */
-#if defined(__printflike)
-# 	define SRT_PRINTFLIKE(n) __printflike(n, n+1)
-#elif defined(__GNUC__)
-# 	define SRT_PRINTFLIKE(n) __attribute__((format( __printf__, n, n+1)))
-#else
-# 	define SRT_PRINTFLIKE(n)
-#endif
-
-/* standardize the debug macro from VCC */
 #if defined(_DEBUG) || defined(DEBUG) || (defined(__GNUC__) && !defined(__OPTIMIZE__))
 #	define SRT_DEBUG
 #endif
 
-/* only include child file once */
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 # 	pragma once
 #endif

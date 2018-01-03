@@ -10,6 +10,8 @@ bin_PROGRAMS = srt
 srt_SOURCES = \
 	src/SRT_define.h \
 	src/SRT_endian.h \
+	src/SRT_std.c \
+	src/SRT_std.h \
 	src/SRT_log.c \
 	src/SRT_log.h \
 	src/SRT_error.c \

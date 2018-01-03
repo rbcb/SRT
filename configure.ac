@@ -12,34 +12,25 @@ AM_INIT_AUTOMAKE([foreign dist-xz subdir-objects -Wall -Werror])
 AC_CONFIG_SRCDIR([src/SRT_endian.h])
 
 # The results of a config for inclusion in project
-AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_HEADERS([src/SRT_config.h])
 
 # Checks for programs.
-AC_PROG_CC
 AC_PROG_CC_C99
-AC_PROG_SED
-AC_PROG_MKDIR_P
+AC_PROG_CPP
+AC_LANG([C])
 
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADERS([limits.h stdint.h syslog.h unistd.h])
+AC_HEADER_STDC
+AC_CHECK_HEADERS([stdio.h stdlib.h malloc.h stddef.h stdarg.h string.h inttypes.h stdint.h limits.h math.h time.h unistd.h syslog.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
-AC_CHECK_HEADER_STDBOOL
-AC_TYPE_INT16_T
-AC_TYPE_INT32_T
-AC_TYPE_INT64_T
-AC_TYPE_INT8_T
-AC_TYPE_SIZE_T
-AC_TYPE_SSIZE_T
-AC_TYPE_UINT16_T
-AC_TYPE_UINT32_T
-AC_TYPE_UINT64_T
-AC_TYPE_UINT8_T
+AC_CHECK_DEFINE(M_PI, math.h)
+AC_CHECK_DEFINE(CHAR_BIT, limits.h)
 
 # Checks for library functions.
-AC_FUNC_MALLOC
+AC_CHECK_FUNCS([malloc calloc realloc free memset memcpy memmove strlen strnlen strcmp vsnprintf snprintf])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

@@ -3,10 +3,7 @@
 #define _LOG_H
 
 #include "SRT_define.h"
-
-#include <time.h>
-#include <stdio.h>
-#include <stdarg.h>
+#include "SRT_std.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -79,12 +76,6 @@ extern void SRT_CCALL SRT_LogFormation(const char* invoke_func, const char* invo
  */
 extern void SRT_CCALL SRT_LogFormationV(const char* invoke_func, const char* invoke_file,
 		size_t invoke_line, SRT_LogPrio priority, const char* fmt, va_list args);
-
-#if ((__GNUC__ >= 2) || defined(_MSC_VER) || defined (__WATCOMC__))
-#	define __func__ __FUNCTION__
-#else
-#	define __func__ "<anonymous>"
-#endif
 
 #if SRT_CVER < 1990
 # 	error "logs require C99 variatic macros"

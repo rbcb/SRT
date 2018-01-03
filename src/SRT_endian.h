@@ -3,23 +3,12 @@
 #define _ENDIAN_H
 
 #include "SRT_define.h"
-
-#include <limits.h>
+#include "SRT_std.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* endian conversion only works with 8 bit chars
- * some old systems using 7 bit chars will not work
- */
-#if CHAR_BIT != 8
-#	error "bad char bit length"
-#endif
-
-/* endianness handling as system byte order may not match bmps
- * bmp files are standardized to little endian byte order
- */
 #define SRT_BIGENDIAN 4321
 #define SRT_LILENDIAN 1234
 
