@@ -12,7 +12,7 @@ AM_INIT_AUTOMAKE([foreign dist-xz subdir-objects -Wall -Werror])
 AC_CONFIG_SRCDIR([src/SRT_endian.h])
 
 # The results of a config for inclusion in project
-AC_CONFIG_HEADERS([src/SRT_config.h])
+AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
 AC_PROG_CC_C99

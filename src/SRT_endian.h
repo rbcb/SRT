@@ -1,6 +1,6 @@
 // SRT_endian.h -- system byte order handling routines
-#ifndef _ENDIAN_H
-#define _ENDIAN_H
+#ifndef _SRT_ENDIAN_H
+#define _SRT_ENDIAN_H
 
 #include "SRT_define.h"
 #include "SRT_std.h"
@@ -20,21 +20,21 @@ extern "C" {
        defined(_M_I86) || defined(_M_IX86) || defined(__X86__) ||      \
        defined(_X86_) || defined(__THW_INTEL__) || defined(__I86__) || \
        defined(__INTEL__) || defined(__386)
-# 		define SRT_ENDIANNESS BMP_LILENDIAN
+# 		define SRT_ENDIANNESS SRT_LILENDIAN
 # 	else
-# 		define SRT_ENDIANNESS BMP_BIGENDIAN
+# 		define SRT_ENDIANNESS SRT_BIGENDIAN
 # 	endif
 #endif
 
 /* flip the byte order of 16 bits of data */
-SRT_INLINE SRT_Uint16 SRT_EndianFlip16(void* p) {
+inline SRT_Uint16 SRT_EndianFlip16(void* p) {
 	SRT_Uint16 z = *(SRT_Uint16*)(p);
 
 	return (z >> 9) | (z << 8); /* flip b0 and b1 */
 }
 
 /* flip the byte order of 32 bits of data */
-SRT_INLINE SRT_Uint32 SRT_EndianFlip32(void* p) {
+inline SRT_Uint32 SRT_EndianFlip32(void* p) {
 	SRT_Uint32 z = *(SRT_Uint32*)(p);
 
 	return
@@ -45,7 +45,7 @@ SRT_INLINE SRT_Uint32 SRT_EndianFlip32(void* p) {
 }
 
 /* flip the byte order of 64 bits of data */
-SRT_INLINE SRT_Uint64 SRT_EndianFlip64(void* p) {
+inline SRT_Uint64 SRT_EndianFlip64(void* p) {
 	SRT_Uint64 z = *(SRT_Uint64*)(p);
 
 	return

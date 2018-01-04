@@ -1,9 +1,9 @@
 // SRT_stdlib.h -- libstd autotools standardization
 // largely a stripped down version of stdinc.h from libSDL
-#ifndef _STD_H
-#define _STD_H
+#ifndef _SRT_STD_H
+#define _SRT_STD_H
 
-#include "SRT_config.h"
+#include "../config.h"
 
 #ifdef HAVE_STDIO_H
 #	include <stdio.h>

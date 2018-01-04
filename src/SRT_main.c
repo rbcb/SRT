@@ -1,5 +1,4 @@
-#include "SRT_log.h"
-
-int main(int argc, char** argv) {
-	SRT_LogNotice("Running...");
+int
+main(int argc, char** argv) {
+	return 0;
 }

@@ -1,6 +1,6 @@
 // SRT_error.h -- internal error state maintainer
-#ifndef _ERROR_H
-#define _ERROR_H
+#ifndef _SRT_ERROR_H
+#define _SRT_ERROR_H
 
 #include "SRT_define.h"
 #include "SRT_log.h"

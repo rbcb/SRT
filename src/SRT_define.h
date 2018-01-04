@@ -1,5 +1,11 @@
 // SRT_define.h -- generic declarations for all headers
 
+#ifdef MSC_VER
+#	ifndef _CRT_SECURE_NO_DEPRECATE
+#		define _CRT_SECURE_NO_DEPRECATE
+#	endif
+#endif
+
 #ifdef __STDC__
 # 	ifdef __STDC_VERSION__
 # 		if __STDC_VERSION__ >= 201112L

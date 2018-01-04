@@ -1,6 +1,6 @@
 // SRT_log.h -- logging interface
-#ifndef _LOG_H
-#define _LOG_H
+#ifndef _SRT_LOG_H
+#define _SRT_LOG_H
 
 #include "SRT_define.h"
 #include "SRT_std.h"
